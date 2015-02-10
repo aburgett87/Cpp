@@ -576,7 +576,8 @@ define(function (require, exports, module) {
             // TODO virtual fianl static 키워드는 섞어 쓸수가 없다
             if (elem.isStatic === true) {
                 methodStr += "static ";
-            } else if (elem.isAbstract === true) {
+            } else if (elem.isAbstract === true ||
+				elem.isLeaf === false || elem.isRoot === false) {
                 methodStr += "virtual ";
             }
 
@@ -637,7 +638,7 @@ define(function (require, exports, module) {
                 methodStr += elem.name;
                 methodStr += "(" + inputParamStrings.join(", ") + ")";
 
-                if (elem.isLeaf === true) {
+                if (this.genOptions.useCpp11 && elem.isLeaf === true) {
                     methodStr += " final";
                 } else if (elem.isAbstract === true) { // TODO 만약 virtual 이면 모두 pure virtual? 체크 할것
                     methodStr += " = 0";
