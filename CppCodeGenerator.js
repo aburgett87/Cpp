@@ -399,7 +399,7 @@ define(function (require, exports, module) {
 
         for (i = 0; i < elem.templateParameters.length; i++) {
             var template = elem.templateParameters[i];
-            var templateStr = template.parameterType + " ";
+			var templateStr = "typename ";
             templateStr += template.name + " ";
             if (template.defaultValue.length !== 0) {
                 templateStr += " = " + template.defaultValue;
