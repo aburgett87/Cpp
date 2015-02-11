@@ -59,12 +59,12 @@ define(function (require, exports, module) {
             type: "Check",
             default: true
         },
-		"Cpp.gen.cpp11": {
-		text: "Generate code conforming to C++11",
-		description: "Use C++11 semantics",
-		type: "Check",
-		default: true
-		},
+        "Cpp.gen.cpp11": {
+            text: "Generate code conforming to C++11",
+            description: "Use C++11 semantics",
+            type: "Check",
+            default: true
+        },
         "Cpp.rev": {
             text: "C++ Reverse Engineering",
             type: "Section"
@@ -109,10 +109,10 @@ define(function (require, exports, module) {
         return {
             useTab              : PreferenceManager.get("Cpp.gen.useTab"),
             indentSpaces        : PreferenceManager.get("Cpp.gen.indentSpaces"),
-            useVector            : PreferenceManager.get("Cpp.gen.useVector"),
-            includeHeader         : PreferenceManager.get("Cpp.gen.includeHeader"),
+            useVector           : PreferenceManager.get("Cpp.gen.useVector"),
+            includeHeader       : PreferenceManager.get("Cpp.gen.includeHeader"),
             genCpp              : PreferenceManager.get("Cpp.gen.genCpp"),
-			useCpp11			: PreferenceManager.get("Cpp.gen.cpp11")
+            useCpp11            : PreferenceManager.get("Cpp.gen.cpp11")
         };
     }
 
