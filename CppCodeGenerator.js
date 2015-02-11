@@ -590,7 +590,7 @@ define(function (require, exports, module) {
             var inputParamStrings = [];
             for (i = 0; i < inputParams.length; i++) {
                 var inputParam = inputParams[i];
-                inputParamStrings.push(inputParam.type + " " + inputParam.name);
+                inputParamStrings.push(inputParam.getTypeString() + " " + inputParam.name);
                 docs += "\n@param " + inputParam.name;
             }
 
