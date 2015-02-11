@@ -189,7 +189,7 @@ define(function (require, exports, module) {
 
 
             var finalModifier = "";
-            if (elem.isFinalSpecialization === true || elem.isLeaf === true) {
+            if (options.useCpp11 === true || elem.isFinalSpecialization === true || elem.isLeaf === true) {
                 finalModifier = " final ";
             }
             var templatePart = cppCodeGen.getTemplateParameter(elem);
@@ -202,6 +202,7 @@ define(function (require, exports, module) {
                 codeWriter.writeLine("public: ");
                 codeWriter.indent();
                 write(classfiedAttributes._public);
+                codeWriter.writeLine("virtual ~" + elem.name + "();");
                 codeWriter.outdent();
             }
             if (classfiedAttributes._protected.length > 0) {
@@ -573,11 +574,13 @@ define(function (require, exports, module) {
             var i;
             var methodStr = "";
             var isVirtaul = false;
+            var ctor = (elem._parent.name === elem.name);
+
             // TODO virtual fianl static 키워드는 섞어 쓸수가 없다
             if (elem.isStatic === true) {
                 methodStr += "static ";
-            } else if (elem.isAbstract === true ||
-				elem.isLeaf === false || elem.isRoot === false) {
+            } else if (!ctor && (elem.isAbstract === true ||
+                elem.isLeaf === false || elem.isRoot === false)) {
                 methodStr += "virtual ";
             }
 
@@ -594,8 +597,9 @@ define(function (require, exports, module) {
                 docs += "\n@param " + inputParam.name;
             }
 
-            methodStr += ((returnTypeParam.length > 0) ? returnTypeParam[0].type : "void") + " ";
-
+            if(!ctor) {
+                methodStr += ((returnTypeParam.length > 0) ? returnTypeParam[0].type : "void") + " ";
+            }
             if (isCppBody) {
                 var t_elem = elem;
                 var specifier = "";
